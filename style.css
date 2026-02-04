@@ -12,6 +12,9 @@
   --border: #2a2e37;
 }
 
+/* ============================= */
+/* RESET & BASE */
+/* ============================= */
 * {
   margin: 0;
   padding: 0;
@@ -21,14 +24,18 @@
 
 body {
   min-height: 100vh;
-  background: var(--bg-main);
-  color: var(--text-main);
+  height: auto;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   padding-top: 70px;
+  background: var(--bg-main);
+  color: var(--text-main);
 }
 
+/* ============================= */
 /* APP */
+/* ============================= */
 .app {
   width: 440px;
   background: var(--bg-card);
@@ -37,7 +44,9 @@ body {
   padding: 24px;
 }
 
+/* ============================= */
 /* HEADER */
+/* ============================= */
 .header {
   display: flex;
   justify-content: space-between;
@@ -59,7 +68,9 @@ body {
   border: 1px solid var(--border);
 }
 
+/* ============================= */
 /* INPUT */
+/* ============================= */
 .input-box {
   display: flex;
   gap: 10px;
@@ -71,8 +82,8 @@ input {
   padding: 11px 12px;
   background: var(--bg-item);
   border: 1px solid var(--border);
-  color: var(--text-main);
   border-radius: 6px;
+  color: var(--text-main);
   outline: none;
 }
 
@@ -98,7 +109,9 @@ button:hover {
   opacity: 0.92;
 }
 
+/* ============================= */
 /* FILTERS */
+/* ============================= */
 .filters {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -119,27 +132,66 @@ button:hover {
   border-color: var(--accent);
 }
 
-/* LIST */
+/* ============================= */
+/* TASK LIST */
+/* ============================= */
 ul {
   list-style: none;
+  max-height: 50vh;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
+ul::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================= */
 /* TODO ITEM */
+/* ============================= */
 li {
   background: var(--bg-item);
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 10px 12px;
+  margin-bottom: 8px;
+
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 8px;
-  transition: background 0.12s, transform 0.12s;
+
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 li:hover {
   background: #20242d;
-  transform: translateY(-1px);
+}
+
+li span {
+  flex: 1;
+  cursor: pointer;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+/* ============================= */
+/* COMPLETED TASK */
+/* ============================= */
+li.completed {
+  background: rgba(63, 140, 255, 0.08);
+  border-color: rgba(63, 140, 255, 0.35);
+  position: relative;
+}
+
+li.completed::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
 }
 
 li.completed span {
@@ -147,23 +199,76 @@ li.completed span {
   color: var(--text-muted);
 }
 
-li span {
-  flex: 1;
-  cursor: pointer;
+/* ============================= */
+/* DELETE FEEDBACK */
+/* ============================= */
+li.deleting {
+  background: rgba(229, 83, 61, 0.12);
+  border-color: var(--danger);
 }
 
+li.fade-out {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* ============================= */
+/* INLINE EDIT MODE + ANIMATION */
+/* ============================= */
+li.editing {
+  background: rgba(63, 140, 255, 0.06);
+  border-color: var(--accent);
+}
+
+li.editing span {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.edit-input {
+  flex: 1;
+  padding: 6px 8px;
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-main);
+  outline: none;
+  font-size: 14px;
+
+  animation: editFadeIn 0.15s ease-out;
+}
+
+.edit-input:focus {
+  border-color: var(--accent);
+}
+
+@keyframes editFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================= */
 /* ACTIONS */
+/* ============================= */
 .actions {
   display: flex;
   gap: 10px;
 }
 
 .actions button {
-  background: transparent;
-  color: var(--text-muted);
+  background: none;
   border: none;
   padding: 0;
   font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
 }
 
 .actions button:hover {
