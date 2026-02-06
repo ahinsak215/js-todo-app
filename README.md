@@ -11,6 +11,25 @@ built using vanilla JavaScript with a professional dark UI.
 - Keyboard support (Enter to add task)
 - Clean and readable UI
 
+
+## Screenshots
+
+### Empty State
+![Empty State](./screenshots/empty-state.png)
+
+### All Tasks View
+![All Tasks](./screenshots/all-tasks.png)
+
+### Inline Editing
+![Inline Editing](./screenshots/editing-task.png)
+
+### Completed Tasks Highlight
+![Completed Tasks](./screenshots/completed-tasks.png)
+
+### Active Tasks Filter
+![Active Filter](./screenshots/active-filter.png)
+
+
 ## Tech Stack
 - HTML
 - CSS
